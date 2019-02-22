@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use \Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
@@ -16,8 +17,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password','status',
+        'id','name', 'username', 'email','tel','password','type',
     ];
+
+    const ADMIN_TYPE = 1;
+    const DEFAULT_TYPE = 0;
+    public function isAdmin(){
+    return $this->type === self::ADMIN_TYPE;
+    }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -28,8 +35,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function status()
-    {
-        return(MustBeAdmin);
+    public function meeting(){
+        return $this->belongToMany('meeting');
     }
+
 }

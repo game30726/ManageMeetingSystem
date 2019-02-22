@@ -13,11 +13,12 @@ class Meeting extends Migration
      */
     public function up()
     {
-        Schema::create('meeting', function (Blueprint $table) {
+        Schema::create('meetings', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('time');
+            $table->text('name');
+            $table->integer('time');
             $table->text('place');
-            $table->text('date');
+            $table->char('date');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class Meeting extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('meeting');
+        Schema::dropIfExists('meetings');
     }
 }
