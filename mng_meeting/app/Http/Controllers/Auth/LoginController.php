@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'meeting';
 
     /**
      * Create a new controller instance.
@@ -45,5 +45,16 @@ class LoginController extends Controller
 
         return property_exists($this, 'username') ? $this->username : 'email' ;
     }
+
+    protected function redirectTo()
+    {
+        if(auth()->user()->isAdmin()) {
+            return 'admin/typeadmin';
+        } else {
+         return 'user';
+        }
+    }
+
     
+
 }
